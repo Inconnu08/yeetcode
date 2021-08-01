@@ -32,17 +32,34 @@ class BST:
                 else:
                     break
 
+    def insert_recursive(self, root, val):
+        if root is None:
+            self.root = Node(val)
+        else:
+            if val < root.val:
+                if root.left:
+                    self.insert_recursive(root.left, val)
+                else:
+                    root.left = Node(val)
+            elif val > root.val:
+                if root.right:
+                    self.insert_recursive(root.right, val)
+                else:
+                    root.right = Node(val)
+            else:
+                return
+
     def inorder(self, node):
 
         if node is not None:
             self.inorder(node.left)
-            print(node.val)
+            print(node.val, end=' ')
             self.inorder(node.right)
 
     def preorder(self, node):
 
         if node is not None:
-            print(node.val)
+            print(node.val, end=' ')
             self.preorder(node.left)
             self.preorder(node.right)
 
@@ -51,7 +68,7 @@ class BST:
         if node is not None:
             self.postorder(node.left)
             self.postorder(node.right)
-            print(node.val)
+            print(node.val, end=' ')
 
 
 bst = BST()
@@ -63,11 +80,29 @@ for i in inputs:
 # print('Breadth-First Traversal')
 # tree.bft()
 
-print('Inorder Traversal')
+print('\nInorder Traversal')
 bst.inorder(bst.root)
 
-print('Preorder Traversal')
+print('\nPreorder Traversal')
 bst.preorder(bst.root)
 
-print('Postorder Traversal')
+print('\nPostorder Traversal')
 bst.postorder(bst.root)
+
+bstr = BST()
+
+inputs = [8, 3, 1, 6, 4, 7, 10, 14, 13]
+for i in inputs:
+    bstr.insert_recursive(bstr.root, i)
+
+# print('Breadth-First Traversal')
+# tree.bft()
+
+print('\nInorder Traversal')
+bstr.inorder(bstr.root)
+
+print('\nPreorder Traversal')
+bstr.preorder(bstr.root)
+
+print('\nPostorder Traversal')
+bstr.postorder(bstr.root)
