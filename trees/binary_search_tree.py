@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, val):
         self.val = val
@@ -37,6 +40,36 @@ def inorder(root):
         inorder(root.right)
 
 
+def getHeight(root):
+    if not root:
+        return 0
+
+    if root.left and root.right:
+        return 1 + max(getHeight(root.left), getHeight(root.right))
+    elif root.left:
+        return 1 + getHeight(root.left)
+    elif root.right:
+        return 1 + getHeight(root.right)
+    else:
+        return 1
+
+
+def bfs(root):
+    if root is None:
+        return
+
+    queue = deque()
+    queue.append(root)
+
+    while len(queue) > 0:
+        print(queue[0].val)
+        node = queue.popleft()
+
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
 # Driver program to test the above functions
 # Let us create the following BST
 #    50
@@ -55,3 +88,7 @@ r = insert(r, 80)
 
 # Print inorder traversal of the BST
 inorder(r)
+
+print('Tree height:', getHeight(r))
+
+bfs(r)

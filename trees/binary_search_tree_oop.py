@@ -49,6 +49,21 @@ class BST:
             else:
                 return
 
+    def __get_height(self, root):
+        if not root:
+            return 0
+        if root.left and root.right:
+            return 1 + max(self.__get_height(root.left), self.__get_height(root.right))
+        elif self.root.left:
+            return 1 + self.__get_height(root.left)
+        elif self.root.right:
+            return 1 + self.__get_height(root.right)
+        else:
+            return 1
+
+    def get_height(self):
+        return self.__get_height(self.root)
+
     def inorder(self, node):
 
         if node is not None:
@@ -106,3 +121,5 @@ bstr.preorder(bstr.root)
 
 print('\nPostorder Traversal')
 bstr.postorder(bstr.root)
+
+print('\n\nheight:', bstr.get_height())
